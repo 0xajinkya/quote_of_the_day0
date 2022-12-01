@@ -23,6 +23,35 @@ class _QuoteListState extends State<QuoteList> {
     Quote(text: 'Rise Above Your Fears', author: 'Vegeta'),
   ];
 
+  Widget quoteTemplate(quote) {
+    return Card(
+      margin: EdgeInsets.fromLTRB(16,16, 16, 0),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              quote.text,
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.grey[600]
+              ),
+            ),
+            SizedBox(height: 6),
+            Text(
+              quote.author,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[800],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +62,8 @@ class _QuoteListState extends State<QuoteList> {
         backgroundColor: Colors.redAccent,
       ),
       body: Column(
-        children: quotes.map((q)=> Text('${q.text}        -${q.author}')) .toList(),
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: quotes.map((q)=> quoteTemplate((q))).toList(),
       ),
     );
   }
