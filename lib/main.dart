@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'quote.dart';
+import 'quote_card.dart';
+
 void main() {
   runApp(
     MaterialApp(
@@ -23,34 +25,12 @@ class _QuoteListState extends State<QuoteList> {
     Quote(text: 'Rise Above Your Fears', author: 'Vegeta'),
   ];
 
-  Widget quoteTemplate(quote) {
-    return Card(
-      margin: EdgeInsets.fromLTRB(16,16, 16, 0),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              quote.text,
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.grey[600]
-              ),
-            ),
-            SizedBox(height: 6),
-            Text(
-              quote.author,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[800],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget quoteTemplate(quote) {
+  //   // return new QuoteCard(text: quote.text, author: quote.author);
+  //   return new QuoteCard( quote: quote );
+  // }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +43,19 @@ class _QuoteListState extends State<QuoteList> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: quotes.map((q)=> quoteTemplate((q))).toList(),
+        // children: quotes.map((q)=> quoteTemplate((q))).toList(),
+        children: quotes.map((q)=> QuoteCard(
+            quote: q,
+            delete: (){
+              setState(() {
+                quotes.remove(q);
+              });
+            }
+        )).toList(),
       ),
     );
   }
 }
+
 
 
